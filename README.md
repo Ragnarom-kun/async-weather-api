@@ -70,6 +70,9 @@ uvicorn main:app --reload
 ```
 Then, open your browser and go to http://localhost:8000 to access the web service.
 
+## Deploy
+This Asynchronous Web Services Deployed in 34.68.157.84 using GCP
+
 ## API Endpoints
 
 - `/` : The home page of the web service.
