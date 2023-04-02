@@ -78,3 +78,4 @@ This Asynchronous Web Services Deployed in 34.68.157.84 using GCP
 - `/` : The home page of the web service.
 - `/weather/{city_name}` : Retrieves the current weather data for the specified city.
 - `/forecast/{city_name}` : Retrieves the 5-day weather forecast for the specified city.
+- `/docs` : The documentation of Weather API (Asynchronous Web Service)
