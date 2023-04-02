@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Asynchronous Weather Web Service</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h1>Weather API Demo</h1>
+    <label for="city-input">Enter city name:</label>
+    <input type="text" id="city-input" />
+    <br />
+    <br />
+    <button id="get-weather-btn">Get Current Weather</button>
+    <button id="get-forecast-btn">Get 5-Day Forecast</button>
+    <br />
+    <br />
+    <div id="weather-data"></div>
+    <div id="forecast-data"></div>
+    <script>
+      $(function () {
+        $("#get-weather-btn").click(function () {
+          var city = $("#city-input").val();
+          if (city) {
+            $.ajax({
+              url: "/weather/" + city,
+              type: "GET",
+              success: function (data) {
+                $("#weather-data").html(
+                  "<p>Temperature: " +
+                    data.temperature +
+                    " &deg;C</p>" +
+                    "<p>Feels like: " +
+                    data.feels_like +
+                    " &deg;C</p>" +
+                    "<p>Description: " +
+                    data.description +
+                    "</p>"
+                );
+              },
+              error: function (xhr, status, error) {
+                alert("Error getting weather data: " + error);
+              },
+            });
+          }
+        });
+
+        $("#get-forecast-btn").click(function () {
+          var city = $("#city-input").val();
+          if (city) {
+            $.ajax({
+              url: "/forecast/" + city,
+              type: "GET",
+              success: function (data) {
+                var forecastHtml = "";
+                for (var i = 0; i < data.forecast.length; i++) {
+                  forecastHtml +=
+                    "<p>" +
+                    data.forecast[i].datetime +
+                    ": " +
+                    data.forecast[i].temperature +
+                    " &deg;C</p>";
+                }
+                $("#forecast-data").html(forecastHtml);
+              },
+              error: function (xhr, status, error) {
+                alert("Error getting forecast data: " + error);
+              },
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
